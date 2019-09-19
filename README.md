@@ -1,2 +1,2 @@
-# EnterprizeOddVerifier
+# EnterpriseOddVerifier
 TODO - Readme
