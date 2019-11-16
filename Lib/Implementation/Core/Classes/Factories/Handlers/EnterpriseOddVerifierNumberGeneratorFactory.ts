@@ -4,9 +4,7 @@ import { EnterpriseOddVerifierNumberGenerator } from "../../Handlers/EnterpriseO
 export class EnterpriseOddVerifierNumberGeneratorFactory extends AbstractEnterpriseOddVerifierFactory<
   EnterpriseOddVerifierNumberGenerator
 > {
-  BuildObject<EnterpriseOddVerifierNumberGenerator>(): Promise<
-    EnterpriseOddVerifierNumberGenerator
-  > {
+  BuildObject(): Promise<EnterpriseOddVerifierNumberGenerator> {
     return Promise.resolve(new EnterpriseOddVerifierNumberGenerator());
   }
 }
