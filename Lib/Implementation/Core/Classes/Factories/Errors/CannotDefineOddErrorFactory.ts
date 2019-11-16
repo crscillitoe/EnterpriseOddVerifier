@@ -1,7 +1,8 @@
 import { CannotDefineOddError } from "../../Errors/CannotDefineOddError";
 import { AbstractEnterpriseOddVerifierFactory } from "../../Abstract/AbstractEnterpriseOddVerifierFactory";
+import { ConstructibleEnterpriseOddVerifierFactory } from "../ConstructibleEnterpriseOddVerifierFactory";
 
-export class CannotDefineOddErrorFactory extends AbstractEnterpriseOddVerifierFactory<
+export class CannotDefineOddErrorFactory extends ConstructibleEnterpriseOddVerifierFactory<
   CannotDefineOddError
 > {
   BuildObject(): Promise<CannotDefineOddError> {
