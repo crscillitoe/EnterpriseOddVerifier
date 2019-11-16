@@ -1,14 +1,12 @@
-import { EnterpriseOddVerifierPrototypeInterface } from "../../Types/EnterpriseOddVerifierPrototypeInterface";
-import { numberLiteralTypeAnnotation } from "@babel/types";
 import { CannotDefineOddErrorFactory } from "../Factories/Errors/CannotDefineOddErrorFactory";
+import { IsOdd } from "../Prototypes/EnterpriseOddVerifierIsOddPrototype";
 
-export class EnterpriseOddVerifierPrototypeInserter<T>
-  implements EnterpriseOddVerifierPrototypeInterface<T> {
+export class EnterpriseOddVerifierPrototypeInserter<T> {
   constructor() {
     try {
       const that = this;
       Object.prototype.isOdd = function() {
-        return that.IsOdd(this);
+        return IsOdd(this);
       };
     } catch (CaughtError) {
       const ErrorFactory = new CannotDefineOddErrorFactory();
@@ -17,15 +15,5 @@ export class EnterpriseOddVerifierPrototypeInserter<T>
       );
       throw Error;
     }
-  }
-
-  IsOdd(PotentiallyOddInputValue: T): boolean {
-    return true;
-  }
-
-  GenerateNumberFromPotentiallyOddInputValue(
-    PotentiallyOddInputValue: T
-  ): number {
-    throw new Error("Method not implemented.");
   }
 }
