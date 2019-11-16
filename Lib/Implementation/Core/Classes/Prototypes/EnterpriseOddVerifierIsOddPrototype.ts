@@ -1,5 +1,5 @@
 export function IsOdd(PotentiallyOddInputValue: any): boolean {
-  return PotentiallyOddInputValue % 2 !== 0;
+  return PotentiallyOddInputValue % 2 === 1;
 }
 
 function GenerateNumberFromPotentiallyOddInputValue(
