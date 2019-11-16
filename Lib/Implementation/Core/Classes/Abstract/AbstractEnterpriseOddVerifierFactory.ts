@@ -1,4 +1,6 @@
 import { EnterpriseOddVerifierFactoryInterface } from "../../Types/EnterpriseOddVerifierFactoryInterface";
+import { EnterpriseOddVerifierGarbageCollectorSingletonQueueObject } from "../../Types/EnterpriseOddVerifierGarbageCollectorSingletonQueueObject";
+import { EnterpriseOddVerifierGarbageCollectorSingleton } from "../Handlers/EnterpriseOddVerifierGarbageCollectorSingleton";
 
 export abstract class AbstractEnterpriseOddVerifierFactory<T>
   implements EnterpriseOddVerifierFactoryInterface<T> {
@@ -19,6 +21,12 @@ export abstract class AbstractEnterpriseOddVerifierFactory<T>
     `);
   }
   DestroyObject(ToDestroy: T): Promise<boolean> {
-    throw new Error("Method not implemented.");
+    const ToDelete: EnterpriseOddVerifierGarbageCollectorSingletonQueueObject<T> = {
+      Item: ToDestroy
+    };
+
+    return EnterpriseOddVerifierGarbageCollectorSingleton.QueueItemForDeletion(
+      ToDelete
+    );
   }
 }

@@ -2,9 +2,11 @@ import { EnterpriseOddVerifierFactoryInterface } from "../../../Types/Enterprise
 import { CannotDefineOddError } from "../../Errors/CannotDefineOddError";
 import { EnterpriseOddVerifierGarbageCollectorSingleton } from "../../Handlers/EnterpriseOddVerifierGarbageCollectorSingleton";
 import { EnterpriseOddVerifierGarbageCollectorSingletonQueueObject } from "../../../Types/EnterpriseOddVerifierGarbageCollectorSingletonQueueObject";
+import { AbstractEnterpriseOddVerifierFactory } from "../../Abstract/AbstractEnterpriseOddVerifierFactory";
 
-export class CannotDefineOddErrorFactory
-  implements EnterpriseOddVerifierFactoryInterface<CannotDefineOddError> {
+export class CannotDefineOddErrorFactory extends AbstractEnterpriseOddVerifierFactory<
+  CannotDefineOddError
+> {
   BuildObject(): Promise<CannotDefineOddError> {
     return this
       .BuildObjectWithSpecificErrorMessage
@@ -16,15 +18,5 @@ export class CannotDefineOddErrorFactory
     SpecificErrorMessage: string = ""
   ): Promise<CannotDefineOddError> {
     return Promise.resolve(new CannotDefineOddError(SpecificErrorMessage));
-  }
-
-  DestroyObject(ToDestroy: CannotDefineOddError): Promise<boolean> {
-    const ToDelete: EnterpriseOddVerifierGarbageCollectorSingletonQueueObject<CannotDefineOddError> = {
-      Item: ToDestroy
-    };
-
-    return EnterpriseOddVerifierGarbageCollectorSingleton.QueueItemForDeletion(
-      ToDelete
-    );
   }
 }

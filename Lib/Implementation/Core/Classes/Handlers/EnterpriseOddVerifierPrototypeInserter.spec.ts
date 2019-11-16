@@ -1,8 +1,12 @@
 import { EnterpriseOddVerifierPrototypeInserter } from "./EnterpriseOddVerifierPrototypeInserter";
+import { EnterpriseOddVerifierPrototypeInserterFactory } from "../Factories/Handlers/EnterpriseOddVerifierPrototypeInserterFactory";
 
-test("Assigns odd prototype to number", () => {
-  const PrototypeInserter = new EnterpriseOddVerifierPrototypeInserter<
-    number
-  >();
-  expect((5).isOdd()).toBe(true);
+test("Assigns odd prototype to all objects", async () => {
+  const Factory = new EnterpriseOddVerifierPrototypeInserterFactory<number>();
+  await Factory.BuildObject(); // This build injects the prototype
+
+  expect((5).isOdd).toBeDefined();
+  expect("".isOdd).toBeDefined();
+  expect({}.isOdd).toBeDefined();
+  expect(Factory.isOdd).toBeDefined();
 });

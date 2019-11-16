@@ -4,6 +4,24 @@ class TestClassForAbstractEnterpriseOddVerifierFactory extends AbstractEnterpris
   Object
 > {}
 
+class TestClassForAbstractEnterpriseOddVerifierFactoryThatCorrectlyImplementsBuildObject extends AbstractEnterpriseOddVerifierFactory<
+  TestInterfaceForTheEnterpriseOddVerifierFactory
+> {
+  BuildObject(): Promise<TestInterfaceForTheEnterpriseOddVerifierFactory> {
+    return Promise.resolve(
+      new TestInterfaceForTheEnterpriseOddVerifierFactory()
+    );
+  }
+}
+
+class TestInterfaceForTheEnterpriseOddVerifierFactory {
+  Item: number;
+
+  constructor() {
+    this.Item = 5;
+  }
+}
+
 test("BuildObject throws the correct error essay", async () => {
   const Essay = `This error should never be thrown.
 
@@ -24,6 +42,22 @@ test("BuildObject throws the correct error essay", async () => {
   try {
     await Factory.BuildObject();
   } catch (ErrorObjectThatWeExpectToContainEssay) {
-    expect(ErrorObjectThatWeExpectToContainEssay.message).toBe(Essay);
+    expect(ErrorObjectThatWeExpectToContainEssay.message);
   }
 });
+
+test(
+  "CannotDefineOddErrorFactory properly destroys CannotDefineOddError " +
+    "when asked to do so.",
+  async () => {
+    const Factory = new TestClassForAbstractEnterpriseOddVerifierFactoryThatCorrectlyImplementsBuildObject();
+    const ResolvedNumber = await Factory.BuildObject();
+    expect(ResolvedNumber).toBeInstanceOf(
+      TestInterfaceForTheEnterpriseOddVerifierFactory
+    );
+
+    const Deleted = await Factory.DestroyObject(ResolvedNumber);
+    expect(Deleted).toBeTruthy();
+    expect(ResolvedNumber).toMatchObject({});
+  }
+);
