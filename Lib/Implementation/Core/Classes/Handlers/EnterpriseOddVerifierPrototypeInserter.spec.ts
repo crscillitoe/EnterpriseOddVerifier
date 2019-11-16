@@ -1,4 +1,3 @@
-import { EnterpriseOddVerifierPrototypeInserter } from "./EnterpriseOddVerifierPrototypeInserter";
 import { EnterpriseOddVerifierPrototypeInserterFactory } from "../Factories/Handlers/EnterpriseOddVerifierPrototypeInserterFactory";
 
 test("Assigns odd prototype to all objects", async () => {
