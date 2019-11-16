@@ -4,11 +4,14 @@ import { CannotDefineOddError } from "../../Errors/CannotDefineOddError";
 export class CannotDefineOddErrorFactory
   implements EnterpriseOddVerifierFactoryInterface<CannotDefineOddError> {
   BuildObject(): Promise<CannotDefineOddError> {
-    return Promise.resolve(new CannotDefineOddError());
+    return this
+      .BuildObjectWithSpecificErrorMessage
+      /* Argument omitted intentionally */
+      ();
   }
 
   BuildObjectWithSpecificErrorMessage(
-    SpecificErrorMessage: string
+    SpecificErrorMessage: string = ""
   ): Promise<CannotDefineOddError> {
     return Promise.resolve(new CannotDefineOddError(SpecificErrorMessage));
   }
