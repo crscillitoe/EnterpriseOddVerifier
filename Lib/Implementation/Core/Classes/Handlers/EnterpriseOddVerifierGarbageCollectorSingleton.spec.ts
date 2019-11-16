@@ -1,18 +1,13 @@
-import {
-  EnterpriseOddVerifierGarbageCollectorSingleton,
-  EnterpriseOddVerifierGarbageCollectorSingletonQueueObject
-} from "./EnterpriseOddVerifierGarbageCollectorSingleton";
-
-interface MyTestInterface {
-  Item: number;
-}
+import { EnterpriseOddVerifierGarbageCollectorSingleton } from "./EnterpriseOddVerifierGarbageCollectorSingleton";
+import { EnterpriseOddVerifierGarbageCollectorSingletonQueueObject } from "../../Types/EnterpriseOddVerifierGarbageCollectorSingletonQueueObject";
+import { EnterpriseOddVerifierDeletionTestInterfaceWithNumber } from "../../Types/EnterpriseOddVerifierDeletionTestInterfaceWithNumber";
 
 test("Item added to queue gets deleted", async () => {
-  const ItemInstance: MyTestInterface = {
+  const ItemInstance: EnterpriseOddVerifierDeletionTestInterfaceWithNumber = {
     Item: 5
   };
 
-  const QueueObjectWrapper: EnterpriseOddVerifierGarbageCollectorSingletonQueueObject = {
+  const QueueObjectWrapper: EnterpriseOddVerifierGarbageCollectorSingletonQueueObject<EnterpriseOddVerifierDeletionTestInterfaceWithNumber> = {
     Item: ItemInstance
   };
 
@@ -20,5 +15,5 @@ test("Item added to queue gets deleted", async () => {
     QueueObjectWrapper
   );
 
-  expect(ItemInstance).toBeUndefined();
+  expect(ItemInstance).toMatchObject({});
 });

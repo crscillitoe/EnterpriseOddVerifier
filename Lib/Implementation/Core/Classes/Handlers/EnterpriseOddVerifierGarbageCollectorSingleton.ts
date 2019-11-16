@@ -1,5 +1,9 @@
+import { EnterpriseOddVerifierGarbageCollectorSingletonQueueObject } from "../../Types/EnterpriseOddVerifierGarbageCollectorSingletonQueueObject";
+
 export class EnterpriseOddVerifierGarbageCollectorSingleton {
-  static Queue: EnterpriseOddVerifierGarbageCollectorSingletonQueueObject[];
+  static Queue: EnterpriseOddVerifierGarbageCollectorSingletonQueueObject<
+    Object
+  >[];
 
   /**
    * Given an item that the user wishes to be deleted,
@@ -12,7 +16,7 @@ export class EnterpriseOddVerifierGarbageCollectorSingleton {
    * @param Item The item to queue up for deletion
    */
   static async QueueItemForDeletion(
-    Item: EnterpriseOddVerifierGarbageCollectorSingletonQueueObject
+    Item: EnterpriseOddVerifierGarbageCollectorSingletonQueueObject<Object>
   ): Promise<boolean> {
     if (this.Queue == undefined) {
       this.Queue = [];
@@ -31,8 +35,4 @@ export class EnterpriseOddVerifierGarbageCollectorSingleton {
 
     return Promise.resolve(true);
   }
-}
-
-export interface EnterpriseOddVerifierGarbageCollectorSingletonQueueObject {
-  Item: Object;
 }

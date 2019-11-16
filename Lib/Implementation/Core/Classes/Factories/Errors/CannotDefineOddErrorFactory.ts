@@ -1,5 +1,7 @@
-import { EnterpriseOddVerifierFactoryInterface } from "../EnterpriseOddVerifierFactoryInterface";
+import { EnterpriseOddVerifierFactoryInterface } from "../../../Types/EnterpriseOddVerifierFactoryInterface";
 import { CannotDefineOddError } from "../../Errors/CannotDefineOddError";
+import { EnterpriseOddVerifierGarbageCollectorSingleton } from "../../Handlers/EnterpriseOddVerifierGarbageCollectorSingleton";
+import { EnterpriseOddVerifierGarbageCollectorSingletonQueueObject } from "../../../Types/EnterpriseOddVerifierGarbageCollectorSingletonQueueObject";
 
 export class CannotDefineOddErrorFactory
   implements EnterpriseOddVerifierFactoryInterface<CannotDefineOddError> {
@@ -17,6 +19,12 @@ export class CannotDefineOddErrorFactory
   }
 
   DestroyObject(ToDestroy: CannotDefineOddError): Promise<boolean> {
-    throw new Error("Method not implemented.");
+    const ToDelete: EnterpriseOddVerifierGarbageCollectorSingletonQueueObject<CannotDefineOddError> = {
+      Item: ToDestroy
+    };
+
+    return EnterpriseOddVerifierGarbageCollectorSingleton.QueueItemForDeletion(
+      ToDelete
+    );
   }
 }
