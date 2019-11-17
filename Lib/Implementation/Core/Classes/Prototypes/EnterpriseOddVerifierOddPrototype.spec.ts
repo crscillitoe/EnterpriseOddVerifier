@@ -54,3 +54,10 @@ test(`
 
   expect(m.isOdd()).toBe(false);
 });
+
+test(`
+  IsOdd properly works on functions
+`, () => {
+  const m = () => {};
+  expect(m.isOdd()).toBe(false);
+});
